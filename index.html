@@ -18,36 +18,62 @@
         <form id="mortgage-form">
           <div class="form-group">
             <label for="amount">Mortgage Amount</label>
-            <input type="number" id="amount" name="amount" required />
+            <div class="input-wrapper">
+              <span class="input-prefix">£</span>
+              <input type="number" id="amount" name="amount" required />
+              <div class="error-message">Error text</div>
+            </div>
           </div>
 
           <div class="form-conditions">
             <div class="form-group">
               <label for="term">Mortgage Term (years)</label>
-              <input type="number" id="term" name="term" required />
+              <div class="input-wrapper">
+                <span class="input-suffix">years</span>
+                <input type="number" id="term" name="term" required />
+                <div class="error-message">Error text</div>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="rate">Interest Rate (%)</label>
-              <input type="number" id="rate" name="rate" step="0.01" required />
+              <div class="input-wrapper">
+                <span class="input-suffix">%</span>
+                <input
+                  type="number"
+                  id="rate"
+                  name="rate"
+                  step="0.01"
+                  required
+                />
+                <div class="error-message">Error text</div>
+              </div>
             </div>
           </div>
 
           <fieldset>
             <legend>Mortgage Type</legend>
-            <label>
+          
+            <div class="mortageRadio">
               <input
                 type="radio"
                 name="mortgageType"
+                id="repayment"
                 value="repayment"
                 required
               />
-              Repayment
-            </label>
-            <label>
-              <input type="radio" name="mortgageType" value="interest-only" />
-              Interest Only
-            </label>
+              <label for="repayment">Repayment</label>
+            </div>
+          
+            <div class="mortageRadio">
+              <input
+                type="radio"
+                name="mortgageType"
+                id="interest-only"
+                value="interest-only"
+              />
+              <label for="interest-only">Interest Only</label>
+            </div>
           </fieldset>
 
           <button class="submit" type="submit">Calculate Repayments</button>
@@ -93,5 +119,6 @@
         </article>
       </section>
     </div>
+    <script src="./script.js"></script>
   </body>
 </html>
