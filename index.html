@@ -53,7 +53,7 @@
 
           <fieldset>
             <legend>Mortgage Type</legend>
-          
+
             <div class="mortageRadio">
               <input
                 type="radio"
@@ -61,10 +61,11 @@
                 id="repayment"
                 value="repayment"
                 required
+                checked
               />
               <label for="repayment">Repayment</label>
             </div>
-          
+
             <div class="mortageRadio">
               <input
                 type="radio"
@@ -81,41 +82,35 @@
       </section>
 
       <section aria-live="polite" class="results">
-        <article class="resultsEmpty" id="results-placeholder">
-          <h2>Your Results</h2>
-          <p>Results shown here.</p>
+        <article class="resultsEmpty displayNone" id="results-placeholder">
+          <img src="./assets/images/illustration-empty.svg" alt="Calculators">
+          <h2>Results shown here.</h2>
           <p>
             Complete the form and click “Calculate Repayments” to see your
             monthly repayments.
           </p>
         </article>
 
-        <article class="resultsCompleted" id="results-output" hidden>
+        <article class="resultsCompleted " id="results-output">
           <h2>Your Results</h2>
           <p>
-            Based on the information you provided, here's an estimate of your
-            mortgage payments.
+            Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.
           </p>
 
-          <ul>
-            <li>
-              <strong>Monthly Repayment:</strong>
-              <output id="monthly-repayment">$0.00</output>
-            </li>
-            <li>
-              <strong>Total Repayment Over Term:</strong>
-              <output id="total-repayment">$0.00</output>
-            </li>
-            <li>
-              <strong>Total Interest Paid:</strong>
-              <output id="total-interest">$0.00</output>
-            </li>
-          </ul>
+          <div class="calculationResults">
 
-          <p>
-            To update the results, edit the form and click "Calculate
-            Repayments" again.
-          </p>
+            <div class="monthlyRepayments">
+              <p>Your monthly repayments</p>
+              <output id="monthly-repayment">£0.00</output>
+            </div>
+
+            <div class="totalRepay">
+              <p>Total you'll repay over the term</p>
+              <output id="total-repayment">£0.00</output>
+            </div>
+            
+          </div>
+
         </article>
       </section>
     </div>

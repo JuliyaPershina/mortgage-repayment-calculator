@@ -1,13 +1,17 @@
 :root {
-  --lime: hsl(61, 70%, 52%);
+  --lime: rgb(215, 218, 47);
   --limeLight: hsla(61, 70%, 52%, 0.15);
+  --limeMiddle: hsla(61, 70%, 52%, 0.5);
   --red: hsl(4, 69%, 50%);
   --white: hsl(0, 0%, 100%);
   --slate-100: hsl(202, 86%, 94%);
   --slate-300: hsl(203, 41%, 72%);
+  --slate-300-line: hsla(203, 41%, 72%, 0.25);
   --slate-500: hsl(200, 26%, 54%);
   --slate-700: hsl(200, 24%, 40%);
   --slate-900: hsl(202, 55%, 16%);
+  --slate-900-shadow: hsla(202, 55%, 16%, 0.1);
+  --resultsBg: rgba(0, 0, 0, 0.25);
 }
 
 @font-face {
@@ -41,7 +45,7 @@ body {
   margin-inline: auto;
   flex-wrap: wrap;
   background: var(--white);
-  box-shadow: 0px 32px 64px rgba(19, 48, 65, 0.1);
+  box-shadow: 0px 32px 64px var(--slate-900-shadow);
   border-radius: 24px;
 }
 
@@ -51,11 +55,11 @@ section {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 40px;
 }
 
 .calculation {
+  justify-content: center;
   .calculation-head {
     display: flex;
     justify-content: space-between;
@@ -74,6 +78,10 @@ section {
       width: 62px;
       height: 24px;
       padding-inline: 0;
+      transition: all 0.4s ease-in-out;
+    }
+    button:hover {
+      color: var(--slate-900);
     }
   }
   form {
@@ -82,6 +90,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 24px;
   }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -130,6 +139,8 @@ section {
     .input-wrapper.focused .input-suffix {
       background: var(--lime);
       color: var(--slate-900);
+      height: 47px;
+      top: 0px;
     }
     .input-wrapper.focused input,
     .input-wrapper.focused input {
@@ -140,6 +151,8 @@ section {
     .input-wrapper.errored .input-suffix {
       background: var(--red);
       color: var(--white);
+      height: 47px;
+      top: 0px;
     }
     .input-wrapper.errored input,
     .input-wrapper.errored input {
@@ -149,7 +162,7 @@ section {
       position: absolute;
       color: red;
       font-size: 14px;
-      bottom: -30px;
+      bottom: -24px;
       display: none;
     }
     .error-message-errored {
@@ -159,6 +172,7 @@ section {
     .input-suffix {
       left: auto;
       right: 1px;
+      top: 1px;
       border-radius: 0px 4px 4px 0px;
     }
 
@@ -194,14 +208,17 @@ section {
     display: flex;
     flex-direction: column;
     border: none;
-    gap: 12px;
+    /* gap: 12px; */
     justify-content: center;
     padding: 0;
+    max-height: 144px;
     legend {
-      margin-block-end: 12px;
+      padding: 0;
     }
     .mortageRadio {
       position: relative;
+      height: 60px;
+      top: -12px;
     }
     label {
       width: 100%;
@@ -225,7 +242,7 @@ section {
     input:checked + label::after {
       content: '';
       position: absolute;
-      bottom: 20px;
+      bottom: 8px;
       left: 25px;
       width: 10px;
       height: 10px;
@@ -244,7 +261,7 @@ section {
     label::before {
       content: '';
       position: absolute;
-      bottom: 15px;
+      bottom: 3px;
       left: 20px;
       width: 20px;
       height: 20px;
@@ -269,6 +286,29 @@ section {
   .submit {
     width: 314px;
     height: 56px;
+    align-self: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-inline-start: 36px;
+    margin-block-start: 16px;
+    gap: 24px;
+    background: var(--lime);
+    border-radius: 999px;
+    flex-grow: 0;
+    border: none;
+    color: var(--slate-900);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 125%;
+    background-image: url(./assets/images/icon-calculator.svg);
+    background-repeat: no-repeat;
+    background-position: 40px center;
+    transition: all 0.4s ease-in-out;
+  }
+  .submit:hover {
+    background-color: var(--limeMiddle);
   }
 }
 
@@ -276,8 +316,82 @@ section {
   background: var(--slate-900);
   border-radius: 0px 24px 24px 80px;
   color: var(--slate-300);
-}
-.resultsEmpty {
-}
-.resultsCompleted {
+  justify-content: flex-start;
+  .resultsEmpty,
+  .resultsCompleted {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    h2 {
+      color: var(--white);
+      line-height: 125%;
+      margin-block: 16px;
+    }
+  }
+  .displayNone {
+    display: none;
+  }
+
+  .resultsEmpty {
+    padding-block-start: 112px;
+  }
+  .resultsCompleted {
+    text-align: left;
+    align-items: start;
+    h2 {
+      margin-block-start: 0;
+    }
+    > p {
+      margin-block-end: 40px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 150%;
+    }
+    .calculationResults {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px;
+      align-items: flex-start;
+      padding: 32px;
+      gap: 32px;
+      width: 424px;
+      height: 293px;
+      background: var(--resultsBg);
+      border-top: 4px solid #d8db2f;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 150%;
+
+      .monthlyRepayments,
+      .totalRepay {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+      .monthlyRepayments {
+        border-bottom: 1px solid var(--slate-300-line);
+        padding-block-end: 32px;
+        #monthly-repayment {
+          font-weight: 700;
+          font-size: 56px;
+          line-height: 125%;
+          color: #d8db2f;
+        }
+      }
+      .totalRepay {
+        #total-repayment {
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 125%;
+          color: var(--white);
+        }
+      }
+    }
+  }
 }
