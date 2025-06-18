@@ -12,7 +12,7 @@
       <section class="calculation">
         <div class="calculation-head">
           <h1>Mortgage Calculator</h1>
-          <button type="reset">Clear All</button>
+          <button id="clear-all" type="reset" form="mortgage-form">Clear All</button>
         </div>
 
         <form id="mortgage-form">
@@ -20,7 +20,7 @@
             <label for="amount">Mortgage Amount</label>
             <div class="input-wrapper">
               <span class="input-prefix">£</span>
-              <input type="number" id="amount" name="amount" required />
+              <input type="number" id="amount" name="amount" min="1000" max="1000000000000" required/>
               <div class="error-message">Error text</div>
             </div>
           </div>
@@ -30,7 +30,7 @@
               <label for="term">Mortgage Term (years)</label>
               <div class="input-wrapper">
                 <span class="input-suffix">years</span>
-                <input type="number" id="term" name="term" required />
+                <input type="number" id="term" name="term" min="1" max="100" required/>
                 <div class="error-message">Error text</div>
               </div>
             </div>
@@ -82,7 +82,7 @@
       </section>
 
       <section aria-live="polite" class="results">
-        <article class="resultsEmpty displayNone" id="results-placeholder">
+        <article class="resultsEmpty displayNone" id="resultsEmpty">
           <img src="./assets/images/illustration-empty.svg" alt="Calculators">
           <h2>Results shown here.</h2>
           <p>
@@ -91,7 +91,7 @@
           </p>
         </article>
 
-        <article class="resultsCompleted " id="results-output">
+        <article class="resultsCompleted " id="resultsCompleted">
           <h2>Your Results</h2>
           <p>
             Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.

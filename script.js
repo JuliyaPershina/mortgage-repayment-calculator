@@ -1,45 +1,68 @@
 const wrappers = document.querySelectorAll('.input-wrapper');
-// const amount = +document.getElementById('amount').value;
+const resultsEmpty = document.getElementById('resultsEmpty');
+const resultsCompleted = document.getElementById('resultsCompleted');
 
-// const termYears = +document.getElementById('term').value;
-// const annualRate = +document.getElementById('rate').value;
 
 //підсвітка полів input
 wrappers.forEach((wrapper) => {
-  const input = wrapper.querySelector('input');
+    const input = wrapper.querySelector('input');
+    
+    console.log(input.validity);
+    
+  const errorMessage = wrapper.querySelector('input+.error-message');
 
   input.addEventListener('focus', () => {
-    const errorMessage = wrapper.querySelector('input+.error-message');
-    console.log(errorMessage);
-
     wrapper.classList.add('focused');
     wrapper.classList.remove('errored');
     errorMessage.classList.remove('error-message-errored');
-    input.addEventListener('blur', () => {
+
+      input.addEventListener('blur', () => {
+          const errorText = getValidationError(input);
+          console.log(errorText);
+          
+        
       console.log(input.value);
       wrapper.classList.remove('focused');
-      if (isTextErrore(input)) {
+      if (errorText) {
         wrapper.classList.add('errored');
         errorMessage.classList.add('error-message-errored');
       }
-    });
-    input.addEventListener('mouseenter', () => {
-      wrapper.classList.remove('errored');
-
-      errorMessage.classList.remove('error-message-errored');
-    });
-    input.addEventListener('mouseleave', () => {
-      if (isTextErrore(input)) {
-        wrapper.classList.add('errored');
-        errorMessage.classList.add('error-message-errored');
-      }
+    //   if (isTextErrore(input)) {
+    //     wrapper.classList.add('errored');
+    //     errorMessage.classList.add('error-message-errored');
+    //   }
     });
   });
 
+  document.getElementById('clear-all').addEventListener('click', (e) => {
+    e.preventDefault();
+    const form = document.getElementById('mortgage-form');
+    form.reset();
+    resultsCompleted.classList.add('displayNone');
+    resultsEmpty.classList.remove('displayNone');
+    wrapper.classList.remove('errored');
+    errorMessage.classList.remove('error-message-errored');
+  });
+
+
   function isTextErrore(input) {
-    return input.value.trim() === '';
-  }
+      // return input.value.trim() === '';
+      return errorText === true;
+    }
+    
+
+    // Валідація
+    
+    function getValidationError(input) {
+        const v = input.validity;
+    
+        if (v.valueMissing) return 'Це поле обовʼязкове';
+        if (v.rangeUnderflow) return `Мінімальне значення — ${input.min}`;
+        if (v.rangeOverflow) return `Максимальне значення — ${input.max}`;
+        return '';
+    }
 });
+
 
 // Розрахунок Repayment
 
@@ -68,12 +91,15 @@ function calculateInterestOnly(amount, termYears, annualRate) {
     totalPaid: +totalPaid.toFixed(2),
   };
 }
+
 // Обираємо тип розрахунку
 
 function checkMortageType() {
   const calculateButton = document.querySelector('.submit');
   calculateButton.addEventListener('click', (e) => {
     e.preventDefault();
+    resultsCompleted.classList.remove('displayNone');
+    resultsEmpty.classList.add('displayNone');
     const mortageType = document.querySelector(
       'input[type="radio"]:checked'
     ).id;
