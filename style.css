@@ -104,6 +104,7 @@ section {
     position: relative;
     display: flex;
     flex-direction: column;
+    width: 100%;
     label {
       padding-block-end: 12px;
     }
@@ -208,7 +209,6 @@ section {
     display: flex;
     flex-direction: column;
     border: none;
-    /* gap: 12px; */
     justify-content: center;
     padding: 0;
     max-height: 144px;
@@ -379,9 +379,13 @@ section {
         padding-block-end: 32px;
         #monthly-repayment {
           font-weight: 700;
-          font-size: 56px;
+          font-size: clamp(24px, 6vw, 56px);
+          white-space: nowrap;
+          overflow: hidden; 
+          text-overflow: ellipsis;
           line-height: 125%;
           color: #d8db2f;
+          max-width: 100%;
         }
       }
       .totalRepay {

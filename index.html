@@ -12,7 +12,9 @@
       <section class="calculation">
         <div class="calculation-head">
           <h1>Mortgage Calculator</h1>
-          <button id="clear-all" type="reset" form="mortgage-form">Clear All</button>
+          <button id="clear-all" type="reset" form="mortgage-form">
+            Clear All
+          </button>
         </div>
 
         <form id="mortgage-form">
@@ -20,8 +22,16 @@
             <label for="amount">Mortgage Amount</label>
             <div class="input-wrapper">
               <span class="input-prefix">£</span>
-              <input type="number" id="amount" name="amount" min="1000" max="1000000000000" required/>
-              <div class="error-message">Error text</div>
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                min="1000"
+                max="1000000000000"
+                maxlength="8"
+                required
+              />
+              <div class="error-message"></div>
             </div>
           </div>
 
@@ -30,8 +40,16 @@
               <label for="term">Mortgage Term (years)</label>
               <div class="input-wrapper">
                 <span class="input-suffix">years</span>
-                <input type="number" id="term" name="term" min="1" max="100" required/>
-                <div class="error-message">Error text</div>
+                <input
+                  type="number"
+                  id="term"
+                  name="term"
+                  min="1"
+                  max="100"
+                  maxlength="3"
+                  required
+                />
+                <div class="error-message"></div>
               </div>
             </div>
 
@@ -45,8 +63,11 @@
                   name="rate"
                   step="0.01"
                   required
+                  min="0"
+                  max="100"
+                  maxlength="5"
                 />
-                <div class="error-message">Error text</div>
+                <div class="error-message"></div>
               </div>
             </div>
           </div>
@@ -83,7 +104,7 @@
 
       <section aria-live="polite" class="results">
         <article class="resultsEmpty displayNone" id="resultsEmpty">
-          <img src="./assets/images/illustration-empty.svg" alt="Calculators">
+          <img src="./assets/images/illustration-empty.svg" alt="Calculators" />
           <h2>Results shown here.</h2>
           <p>
             Complete the form and click “Calculate Repayments” to see your
@@ -91,14 +112,15 @@
           </p>
         </article>
 
-        <article class="resultsCompleted " id="resultsCompleted">
+        <article class="resultsCompleted" id="resultsCompleted">
           <h2>Your Results</h2>
           <p>
-            Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.
+            Your results are shown below based on the information you provided.
+            To adjust the results, edit the form and click “calculate
+            repayments” again.
           </p>
 
           <div class="calculationResults">
-
             <div class="monthlyRepayments">
               <p>Your monthly repayments</p>
               <output id="monthly-repayment">£0.00</output>
@@ -108,9 +130,7 @@
               <p>Total you'll repay over the term</p>
               <output id="total-repayment">£0.00</output>
             </div>
-            
           </div>
-
         </article>
       </section>
     </div>
